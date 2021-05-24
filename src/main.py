@@ -1,3 +1,4 @@
+import logging
 from typing import Optional
 
 from confluent_kafka.cimpl import KafkaException
@@ -5,6 +6,8 @@ from fastapi import FastAPI
 
 from kafka import AIOProducer, create_topics
 from models import Event
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 producer: Optional[AIOProducer] = None
@@ -27,6 +30,6 @@ def shutdown_event():
 async def create_item(event: Event):
     try:
         await producer.produce("events", event.dict())
-    except KafkaException:
-        pass
+    except KafkaException as exc:
+        logger.exception(exc)
     return {}
