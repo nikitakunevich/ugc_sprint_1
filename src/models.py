@@ -12,7 +12,6 @@ class MovieViewingHistoryPayload(BaseModel):
 
 class Event(BaseModel):
     payload: Union[MovieViewingHistoryPayload]
-    timestamp: int = datetime.now().timestamp()
     language: str
     timezone: str
     fingerprint: dict
