@@ -1,13 +1,13 @@
-from datetime import datetime
 from typing import Union
+from uuid import UUID
 
 from pydantic import BaseModel
 
 
 class MovieViewingHistoryPayload(BaseModel):
-    timestamp: int
-    movie_id: int
-    user_id: int
+    movie_timestamp: int
+    movie_id: str
+    user_id: str
 
 
 class Event(BaseModel):

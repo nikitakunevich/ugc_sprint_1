@@ -7,6 +7,7 @@ name = "pypi"
 confluent-kafka = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+clickhouse-driver = "*"
 
 [dev-packages]
 black = "==18.4a4"

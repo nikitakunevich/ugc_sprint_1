@@ -3,11 +3,22 @@ services:
   analytic_api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-api
     env_file:
-      - .env
+      - .env-api
     ports:
       - 8000:8000
+    networks:
+      - ugc
+
+  etl:
+    build:
+      context: .
+      dockerfile: Dockerfile-etl
+    env_file:
+      - .env-etl
+    networks:
+      - ugc
 
   # Kafka
   zookeeper-1:
