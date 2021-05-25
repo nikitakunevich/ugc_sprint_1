@@ -3,11 +3,22 @@ services:
   analytic_api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: api/Dockerfile
     env_file:
-      - .env
+      - api/.env
     ports:
       - 8000:8000
+    networks:
+      - ugc
+
+  etl:
+    build:
+      context: .
+      dockerfile: etl/Dockerfile
+    env_file:
+      - etl/.env
+    networks:
+      - ugc
 
   # Kafka
   zookeeper-1:
@@ -118,7 +129,7 @@ services:
       - "8123:8123"
       - "9000:9000"
     volumes:
-      - ./docker/clickhouse/data/node1:/etc/clickhouse-server
+      - ./etl/docker/clickhouse/data/node1:/etc/clickhouse-server
     depends_on:
       - cl-zookeeper
     networks:
@@ -129,7 +140,7 @@ services:
     container_name: clickhouse-node2
     hostname: clickhouse-node2
     volumes:
-      - ./docker/clickhouse/data/node2:/etc/clickhouse-server
+      - ./etl/docker/clickhouse/data/node2:/etc/clickhouse-server
     depends_on:
       - cl-zookeeper
     networks:
@@ -140,7 +151,7 @@ services:
     container_name: clickhouse-node3
     hostname: clickhouse-node3
     volumes:
-      - ./docker/clickhouse/data/node3:/etc/clickhouse-server
+      - ./etl/docker/clickhouse/data/node3:/etc/clickhouse-server
     depends_on:
       - cl-zookeeper
     networks:
@@ -151,7 +162,7 @@ services:
     container_name: clickhouse-node4
     hostname: clickhouse-node4
     volumes:
-      - ./docker/clickhouse/data/node4:/etc/clickhouse-server
+      - ./etl/docker/clickhouse/data/node4:/etc/clickhouse-server
     depends_on:
       - cl-zookeeper
     networks:

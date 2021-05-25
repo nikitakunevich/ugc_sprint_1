@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 confluent-kafka = "*"
-fastapi = "*"
-uvicorn = {extras = ["standard"], version = "*"}
+pydantic = "*"
+clickhouse-driver = "*"
+black = "==18.4a4"
 
 [dev-packages]
 black = "==18.4a4"

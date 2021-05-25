@@ -2,7 +2,7 @@
 
 cmd="$@"
 
-while ! nc -z -v 'kafka-1' 9092;
+while ! nc -z -v $KAFKA_WAITER_HOST $KAFKA_WAITER_PORT;
 do
   >&2 echo "Kafka is unavailable - sleeping"
   sleep 2;
