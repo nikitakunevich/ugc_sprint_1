@@ -2,13 +2,13 @@
 
 cmd="$@"
 
-while ! nc -z -v 'kafka-1' 9092;
+while ! nc -z -v $KAFKA_WAITER_HOST $KAFKA_WAITER_PORT;
 do
   >&2 echo "Kafka is unavailable - sleeping"
   sleep 2;
 done
 
-while ! nc -z -v 'clickhouse-node1' 9000;
+while ! nc -z -v $CLICKHOUSE_MAIN_HOST $CLICKHOUSE_MAIN_PORT;
 do
   >&2 echo "Clickhouse is unavailable - sleeping"
   sleep 2;

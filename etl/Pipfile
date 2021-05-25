@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+confluent-kafka = "*"
+pydantic = "*"
+clickhouse-driver = "*"
+black = "==18.4a4"
+
+[dev-packages]
+black = "==18.4a4"
+isort = "*"
+pylint = "*"
+flake8 = "*"
+
+[requires]
+python_version = "3.9"

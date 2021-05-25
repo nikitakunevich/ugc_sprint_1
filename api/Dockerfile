@@ -9,14 +9,14 @@ WORKDIR $ROOT_DIR
 
 RUN apt-get update && apt-get install -y netcat
 
-COPY Pipfile Pipfile.lock $ROOT_DIR
+COPY api/Pipfile api/Pipfile.lock $ROOT_DIR
 
 RUN python -m pip install --upgrade pip && pip install pipenv
 RUN pipenv install --system --ignore-pipfile
 
-COPY etl $ROOT_DIR
+COPY api/src/ $ROOT_DIR
 
-COPY docker/wait-all-services.sh $ROOT_DIR
-RUN chmod +x wait-all-services.sh
+COPY api/docker/wait-services.sh $ROOT_DIR
+RUN chmod +x wait-services.sh
 
-ENTRYPOINT ["./wait-all-services.sh", "python", "main.py"]
+ENTRYPOINT ["./wait-services.sh", "uvicorn", "--host", "0.0.0.0", "--port", "8000", "main:app"]
