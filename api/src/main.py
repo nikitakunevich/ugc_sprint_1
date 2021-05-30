@@ -17,6 +17,7 @@ producer: Optional[AIOProducer] = None
 def startup_event():
     global producer
     producer = AIOProducer()
+    producer.start()
 
     create_topics()
 

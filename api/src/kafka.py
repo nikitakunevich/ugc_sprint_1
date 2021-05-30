@@ -19,6 +19,8 @@ class AIOProducer:
         self._producer = Producer({"bootstrap.servers": settings.kafka_hosts_as_string})
         self._cancelled = False
         self._poll_thread = Thread(target=self._poll_loop)
+
+    def start(self) -> None:
         self._poll_thread.start()
 
     def _poll_loop(self) -> None:
